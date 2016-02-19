@@ -1,0 +1,16 @@
+{% extends "gitdashboard/base.html" %}
+
+{% block content %}
+  <div>
+    <p>Generated Date: {{ date }}</p>
+  </div>
+    {% for k,v in res %}
+      <div>
+      <h1 id="{{ k }}">{{ k }}</h1>
+      {% for xx in v %}
+        <h2>{{ xx }}</h2>
+      {% endfor %}
+      </div>
+    {% endfor %}
+  <div id="period"></div>
+{% endblock content %}

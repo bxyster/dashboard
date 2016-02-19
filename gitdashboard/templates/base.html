@@ -1,0 +1,40 @@
+<html>
+    <head>
+      <title>Git Inspector Detail</title>
+      <script type='text/javascript' src="/static/gitdashboard/js/jquery.min.js"></script>
+      <script type='text/javascript' src="/static/gitdashboard/js/moment.min.js"></script>
+      <script type="text/javascript">
+          $(function(){
+            var d = moment().format('YYYYMMDD');
+            var d1 = moment().subtract(1, 'days').format('YYYYMMDD');
+            var d2 = moment().subtract(2, 'days').format('YYYYMMDD');
+            var d3 = moment().subtract(3, 'days').format('YYYYMMDD');
+            var d4 = moment().subtract(4, 'days').format('YYYYMMDD');
+            var d5 = moment().subtract(5, 'days').format('YYYYMMDD');
+            var d6 = moment().subtract(6, 'days').format('YYYYMMDD');
+            
+            {% for k,v in res %}   
+               $("#{{ k }}").click(function(event){
+                 event.preventDefault();
+                 $('#period').empty();
+                 {% for xx in v %}
+                 $('#period').append("<div><a href='detail/{{k}}/{{xx}}/"+ d + "'>{{k}}-{{xx}}-"+ d +"</a></div>" + "<div><a href='detail/{{k}}/{{xx}}/"+ d1 + "'>{{k}}-{{xx}}-"+ d1 +"</a></div>" + "<div><a href='detail/{{k}}/{{xx}}/"+ d2 + "'>{{k}}-{{xx}}-"+ d2 +"</a></div>" + "<div><a href='detail/{{k}}/{{xx}}/"+ d3 + "'>{{k}}-{{xx}}-"+ d3 +"</a></div>" + "<div><a href='detail/{{k}}/{{xx}}/"+ d4 + "'>{{k}}-{{xx}}-"+ d4 +"</a></div>" + "<div><a href='detail/{{k}}/{{xx}}/"+ d5 + "'>{{k}}-{{xx}}-"+ d5 +"</a></div>" + "<div><a href='detail/{{k}}/{{xx}}/"+ d6 + "'>{{k}}-{{xx}}-"+ d6 +"</a></div>");
+                 {% endfor %}
+               });
+            {% endfor %}
+          });
+        </script>
+    </head>
+
+    <body>
+        {{ user }}
+        {% if user.is_anonymous %}
+        <a href="{% url 'django.contrib.auth.views.login' %}">login</a>
+        {% else %}
+        <a href="{% url 'django.contrib.auth.views.logout' %}">logout</a>
+        {% endif %}
+
+        {% block content %}
+        {% endblock %}
+      </body>
+</html>

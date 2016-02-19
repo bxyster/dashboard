@@ -1,0 +1,36 @@
+{% extends "gitdashboard/base.html" %}
+
+{% block content %}
+  {% if messages %}
+  <ul class="messages">
+    {% for message in messages %}
+    <li>{{ message }}</li>
+    {% endfor %}
+  </ul>
+  {% endif %}  
+  
+  <h1>Git Inspector Detail</h1>
+  
+  <div>
+    <p>Generated Date: {{ date }}</p>
+  </div>
+
+  {% regroup list_list by group as section_list %}
+  
+  {% for group in section_list %}
+    <h3>{{ group.grouper }}</h3>
+    <ul>
+      {% for item in group.list %}
+        <div id="{{ item.rname }}-{{ item.branch }}">{{ item.rname }}-{{ item.branch }}</div>
+      {% endfor %}
+    </ul>
+  {% endfor %}
+
+  <div class="repo-break">
+  &nbsp;
+  </div>
+
+  <p><a href="{% url 'repo-add_list' %}">Create new repo list</a></p>
+
+  <div id="period"></div>
+{% endblock content %}

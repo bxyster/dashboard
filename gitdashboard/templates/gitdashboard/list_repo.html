@@ -1,0 +1,20 @@
+{% extends "gitdashboard/base.html" %}
+
+{% block content %}
+  {% if messages %}
+  <ul class="messages">
+    {% for message in messages %}
+    <li>{{ message }}</li>
+    {% endfor %}
+  </ul>
+  {% endif %}
+
+
+    <table>
+      {% for repo in repos %}
+      <tr>
+        <td>{{ repo }}</td>
+      </tr>
+      {% endfor %}
+    </table>
+{% endblock content %}

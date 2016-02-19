@@ -1,0 +1,22 @@
+{% extends "gitdashboard/base.html" %}
+
+{% block content %}
+  {% if messages %}
+  <ul class="messages">
+    {% for message in messages %}
+    <li>{{ message }}</li>
+    {% endfor %}
+  </ul>
+  {% endif %}
+
+  <h1>Git Inspector Submit</h1>
+
+  <form method="post" action="/list_submit/">{% csrf_token %}
+    <table>
+      {{ form.as_table }}
+      <tr>
+        <td colspan="2"><input type="submit" value="Submit"></td>
+      </tr>
+    </table>
+  </form>
+{% endblock content %}

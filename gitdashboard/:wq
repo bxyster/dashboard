@@ -1,0 +1,15 @@
+from django import forms
+from django.forms import ModelForm
+from django.contrib.auth.models import User, Group
+from gitdashboard.models import Repo, Branch
+
+class AddListForm(ModelForm):
+  # The picklist showing allowable groups to which a new list can be added
+  # determines which groups the user belongs to. This queries the form object
+  # to derive that list.
+  def __init__(self, user, *args, **kwargs):
+    super(AddListForm, self).__init__(*args, **kwargs)
+    self.fields['group'].get_queryset = Group.objects.filter(user=user)
+
+  class Meta:
+    model = Repo
